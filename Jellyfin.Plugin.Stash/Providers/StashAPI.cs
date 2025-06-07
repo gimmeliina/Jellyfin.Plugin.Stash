@@ -208,8 +208,10 @@ namespace Stash.Providers
                 Url = sceneData.Paths.Screenshot,
             });
 
-            var groupImageUrl = sceneData.Groups?.Group.FrontImagePath;
-
+            var groupImageUrl = sceneData.Groups?
+                .Where(g => !string.IsNullOrWhiteSpace(g.Group.FrontImagePath))
+                .Select(g => g.Group.FrontImagePath)
+                .FirstOrDefault();
 
             if (!string.IsNullOrWhiteSpace(groupImageUrl))
             {
