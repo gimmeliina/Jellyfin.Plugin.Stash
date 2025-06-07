@@ -31,6 +31,7 @@ namespace Stash.Providers
                 ImageType.Primary,
                 ImageType.Backdrop,
                 ImageType.Logo,
+                ImageType.Box,
             };
 
 #if __EMBY__
