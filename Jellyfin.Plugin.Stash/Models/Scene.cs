@@ -31,6 +31,6 @@ namespace Stash.Models
         public List<Performer> Performers { get; set; }
 
         [JsonProperty(PropertyName = "groups")]
-        public Groups? Groups { get; set; }
+        public List<Groups> Groups { get; set; }
     }
 }
