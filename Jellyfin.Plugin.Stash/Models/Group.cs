@@ -9,6 +9,5 @@ namespace Stash.Models
 
         [JsonProperty(PropertyName = "director")]
         public string Director { get; set; }
-
     }
 }
