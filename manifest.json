@@ -11,9 +11,9 @@
                 "checksum": "09704c7baa7bda5d80e9a40f6d1b54e60af2536df894fe4ed5554c1d760e4784",
                 "changelog": "Added Support Jellyfin 10.9; Added Disambiguation Field to Performer Name; Minor Changes",
                 "targetAbi": "10.9.0.0",
-                "sourceUrl": "https://github.com/DirtyRacer1337/Jellyfin.Plugin.Stash/releases/download/latest/Jellyfin.Plugin.Stash.zip",
+                "sourceUrl": "https://github.com/gimmeliina/Jellyfin.Plugin.Stash/releases/download/latest/Jellyfin.Plugin.Stash.zip",
                 "timestamp": "2024-06-07T21:00:55Z",
-                "version": "1.1.0.6"
+                "version": "1.1.0.7"
             }
         ]
     }
