@@ -206,6 +206,7 @@ namespace Stash.Providers
                 .Where(g => !string.IsNullOrWhiteSpace(g.Group.FrontImagePath))
                 .Select(g => g.Group.FrontImagePath)
                 .FirstOrDefault();
+            var screenImageUrl = sceneData.Paths.Screenshot;
 
             if (!string.IsNullOrWhiteSpace(groupImageUrl))
             {
@@ -218,12 +219,12 @@ namespace Stash.Providers
             result.Add(new RemoteImageInfo
             {
                 Type = ImageType.Primary,
-                Url = sceneData.Paths.Screenshot,
+                Url = screenImageUrl,
             });
             result.Add(new RemoteImageInfo
             {
                 Type = ImageType.Backdrop,
-                Url = sceneData.Paths.Screenshot,
+                Url = screenImageUrl,
             });
 
             if (sceneData.Studio.HasValue)
