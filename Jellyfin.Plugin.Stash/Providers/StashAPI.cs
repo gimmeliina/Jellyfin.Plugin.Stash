@@ -202,12 +202,6 @@ namespace Stash.Providers
             data = http["data"]["findScene"].ToString();
             var sceneData = JsonConvert.DeserializeObject<Scene>(data);
 
-            result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Primary,
-                Url = sceneData.Paths.Screenshot,
-            });
-
             var groupImageUrl = sceneData.Groups?
                 .Where(g => !string.IsNullOrWhiteSpace(g.Group.FrontImagePath))
                 .Select(g => g.Group.FrontImagePath)
@@ -221,7 +215,11 @@ namespace Stash.Providers
                     Url = groupImageUrl,
                 });
             }
-
+            result.Add(new RemoteImageInfo
+            {
+                Type = ImageType.Primary,
+                Url = sceneData.Paths.Screenshot,
+            });
             result.Add(new RemoteImageInfo
             {
                 Type = ImageType.Backdrop,
