@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -203,6 +204,20 @@ namespace Stash.Providers
                 Type = ImageType.Primary,
                 Url = sceneData.Paths.Screenshot,
             });
+
+            var groupImageUrl = sceneData.Groups?
+                .Where(g => !string.IsNullOrWhiteSpace(g.Group.FrontImagePath))
+                .Select(g => g.Group.FrontImagePath)
+                .FirstOrDefault();
+
+            if (!string.IsNullOrWhiteSpace(groupImageUrl))
+            {
+                result.Add(new RemoteImageInfo
+                {
+                    Type = ImageType.Box,
+                    Url = groupImageUrl,
+                });
+            }
 
             result.Add(new RemoteImageInfo
             {
