@@ -223,7 +223,8 @@ namespace Stash.Providers
                     Type = ImageType.Primary,
                     Url = groupImageUrl,
                 });
-            } else if (!string.IsNullOrWhiteSpace(screenImageUrl))
+            }
+            else if (!string.IsNullOrWhiteSpace(screenImageUrl))
             {
                 result.Add(new RemoteImageInfo
                 {
