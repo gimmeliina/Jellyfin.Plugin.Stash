@@ -29,6 +29,7 @@ namespace Stash.Models
 
         [JsonProperty(PropertyName = "performers")]
         public List<Performer> Performers { get; set; }
+
         public List<Groups> Groups { get; set; }
     }
 }
