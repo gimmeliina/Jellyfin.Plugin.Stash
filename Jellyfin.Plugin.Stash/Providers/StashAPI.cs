@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -62,11 +63,7 @@ namespace Stash.Providers
             var result = new List<RemoteSearchResult>();
 
             var query = searchInfo.Name;
-#if __EMBY__
-            string path = string.Empty;
-#else
             var path = Plugin.Instance.Configuration.UseFilePath ? searchInfo.Path : string.Empty;
-#endif
 
             if (string.IsNullOrEmpty(query))
             {
@@ -174,7 +171,7 @@ namespace Stash.Providers
                     ImageUrl = actorLink.ImagePath,
                 };
 
-                result.People.Add(actor);
+                result.AddPerson(actor);
             }
 
             result.HasMetadata = true;
@@ -304,9 +301,21 @@ namespace Stash.Providers
             var sceneData = JsonConvert.DeserializeObject<Performer>(data);
 
             result.Item.OriginalTitle = string.Join(", ", sceneData.AliasList);
-
+            result.Item.Overview = sceneData.Details;
             result.Item.PremiereDate = sceneData.BirthDate;
             result.Item.EndDate = sceneData.DeathDate;
+
+            if (!string.IsNullOrEmpty(sceneData.Country))
+            {
+                result.Item.ProductionLocations = new string[] { new RegionInfo(sceneData.Country).EnglishName };
+            }
+
+            foreach (var genreLink in sceneData.Tags)
+            {
+                var genreName = genreLink.Name;
+
+                result.Item.AddGenre(genreName);
+            }
 
             result.HasMetadata = true;
 

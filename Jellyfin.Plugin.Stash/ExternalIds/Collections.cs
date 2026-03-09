@@ -10,7 +10,11 @@ using MediaBrowser.Model.Providers;
 
 namespace Stash.ExternalIds
 {
+#if __EMBY__
+    public class Collections : IExternalId, IHasWebsite
+#else
     public class Collections : IExternalId
+#endif
     {
 #if __EMBY__
         public string Name => Plugin.Instance.Name;
@@ -22,7 +26,11 @@ namespace Stash.ExternalIds
 
         public string Key => Plugin.Instance.Name;
 
+#if __EMBY__
         public string UrlFormatString => Plugin.Instance.Configuration.StashEndpoint + "/studios/{0}";
+
+        public string Website => Plugin.Instance.Configuration.StashEndpoint;
+#endif
 
         public bool Supports(IHasProviderIds item) => item is BoxSet;
     }

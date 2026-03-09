@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Providers;
+using Stash.Configuration;
 using Stash.Helpers;
 
 #if __EMBY__
@@ -16,7 +17,11 @@ using System.Net.Http;
 
 namespace Stash.Providers
 {
+#if __EMBY__
+    public class Peoples : IRemoteMetadataProvider<Person, PersonLookupInfo>, IHasSupportedExternalIdentifiers
+#else
     public class Peoples : IRemoteMetadataProvider<Person, PersonLookupInfo>
+#endif
     {
         public string Name => Plugin.Instance.Name;
 
@@ -79,6 +84,30 @@ namespace Stash.Providers
                 Logger.Error($"Actor Update error: \"{e}\"");
             }
 
+            if (result.HasMetadata)
+            {
+                var tags = result.Item.Genres;
+                switch (Plugin.Instance.Configuration.TagStyle)
+                {
+                    case TagStyle.Disabled:
+                        result.Item.Genres = Array.Empty<string>();
+                        result.Item.Tags = Array.Empty<string>();
+                        break;
+                    case TagStyle.Genre:
+                        result.Item.Genres = tags.ToArray();
+                        result.Item.Tags = Array.Empty<string>();
+                        break;
+                    case TagStyle.Tag:
+                        result.Item.Genres = Array.Empty<string>();
+                        result.Item.Tags = tags.ToArray();
+                        break;
+                }
+            }
+            else
+            {
+                result.HasMetadata = true;
+            }
+
             return result;
         }
 
@@ -90,5 +119,12 @@ namespace Stash.Providers
         {
             return UGetImageResponse.SendAsync(url, cancellationToken);
         }
+
+#if __EMBY__
+        public string[] GetSupportedExternalIdentifiers()
+        {
+            return new[] { Plugin.Instance.Name };
+        }
+#endif
     }
 }
