@@ -8,4 +8,3 @@ namespace Stash.Models
         public Group Group { get; set; }
     }
 }
-

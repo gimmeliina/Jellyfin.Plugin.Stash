@@ -199,16 +199,17 @@ namespace Stash.Providers
             data = http["data"]["findScene"].ToString();
             var sceneData = JsonConvert.DeserializeObject<Scene>(data);
 
-            result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Primary,
-                Url = sceneData.Paths.Screenshot,
-            });
-
             var groupImageUrl = sceneData.Groups?
                 .Where(g => !string.IsNullOrWhiteSpace(g.Group.FrontImagePath))
                 .Select(g => g.Group.FrontImagePath)
                 .FirstOrDefault();
+            var screenImageUrl = sceneData.Paths.Screenshot;
+
+            result.Add(new RemoteImageInfo
+            {
+                Type = ImageType.Backdrop,
+                Url = screenImageUrl,
+            });
 
             if (!string.IsNullOrWhiteSpace(groupImageUrl))
             {
@@ -217,13 +218,19 @@ namespace Stash.Providers
                     Type = ImageType.Box,
                     Url = groupImageUrl,
                 });
-            }
-
-            result.Add(new RemoteImageInfo
+                result.Add(new RemoteImageInfo
+                {
+                    Type = ImageType.Primary,
+                    Url = groupImageUrl,
+                });
+            } else if (!string.IsNullOrWhiteSpace(screenImageUrl))
             {
-                Type = ImageType.Backdrop,
-                Url = sceneData.Paths.Screenshot,
-            });
+                result.Add(new RemoteImageInfo
+                {
+                    Type = ImageType.Primary,
+                    Url = screenImageUrl,
+                });
+            }
 
             if (sceneData.Studio.HasValue)
             {
