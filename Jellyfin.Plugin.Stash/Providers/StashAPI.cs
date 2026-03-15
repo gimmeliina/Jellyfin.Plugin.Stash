@@ -219,17 +219,17 @@ namespace Stash.Providers
                 {
                     Type = ImageType.Primary,
                     Url = screenImageUrl,
-                });            
+                });
                 result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Backdrop,
-                Url = screenImageUrl,
-            });
+                {
+                    Type = ImageType.Backdrop,
+                    Url = screenImageUrl,
+                });
                 result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Thumb,
-                Url = screenImageUrl,
-            });
+                {
+                    Type = ImageType.Thumb,
+                    Url = screenImageUrl,
+                });
             }
 
             if (sceneData.Studio.HasValue)
