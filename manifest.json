@@ -8,12 +8,12 @@
         "overview": "",
         "versions": [
             {
-                "checksum": "c244189e1cf9df099734c9471ea2465aa47085d10b0265f7facb57771bf25a58",
+                "checksum": "e91862068858cbed603149abc93c8823facf89a22a5286b73f7f8f27016a6523",
                 "changelog": "Added Support Jellyfin 10.9; Added Disambiguation Field to Performer Name; Minor Changes",
                 "targetAbi": "10.10.0.0",
                 "sourceUrl": "https://github.com/gimmeliina/Jellyfin.Plugin.Stash/releases/download/latest/Jellyfin.Plugin.Stash.zip",
-                "timestamp": "2026-03-09T12:00:55Z",
-                "version": "1.2.0.4"
+                "timestamp": "2026-03-15T12:00:55Z",
+                "version": "1.2.0.6"
             }
         ]
     }
