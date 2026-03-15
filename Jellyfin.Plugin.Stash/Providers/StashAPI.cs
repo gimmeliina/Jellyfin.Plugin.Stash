@@ -222,16 +222,6 @@ namespace Stash.Providers
                     Type = ImageType.Box,
                     Url = groupImageUrl,
                 });
-                result.Add(new RemoteImageInfo
-                {
-                    Type = ImageType.Primary,
-                    Url = groupImageUrl,
-                });
-                result.Add(new RemoteImageInfo
-                {
-                    Type = ImageType.Thumb,
-                    Url = screenImageUrl,
-                });
             }
             else if (!string.IsNullOrWhiteSpace(screenImageUrl))
             {
