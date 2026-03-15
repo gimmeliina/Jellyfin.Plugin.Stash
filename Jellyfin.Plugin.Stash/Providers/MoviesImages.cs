@@ -32,7 +32,7 @@ namespace Stash.Providers
                 ImageType.Backdrop,
                 ImageType.Logo,
                 ImageType.Box,
-                ImageType.Thumb
+                ImageType.Thumb,
             };
 
 #if __EMBY__
