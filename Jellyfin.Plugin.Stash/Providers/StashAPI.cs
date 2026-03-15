@@ -210,13 +210,11 @@ namespace Stash.Providers
                 Type = ImageType.Backdrop,
                 Url = screenImageUrl,
             });
-
             result.Add(new RemoteImageInfo
             {
                 Type = ImageType.Thumb,
                 Url = screenImageUrl,
             });
-            
             if (!string.IsNullOrWhiteSpace(groupImageUrl))
             {
                 result.Add(new RemoteImageInfo
