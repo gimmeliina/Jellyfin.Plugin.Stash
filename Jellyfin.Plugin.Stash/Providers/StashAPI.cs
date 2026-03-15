@@ -205,16 +205,6 @@ namespace Stash.Providers
                 .FirstOrDefault();
             var screenImageUrl = sceneData.Paths.Screenshot;
 
-            result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Backdrop,
-                Url = screenImageUrl,
-            });
-            result.Add(new RemoteImageInfo
-            {
-                Type = ImageType.Thumb,
-                Url = screenImageUrl,
-            });
             if (!string.IsNullOrWhiteSpace(groupImageUrl))
             {
                 result.Add(new RemoteImageInfo
@@ -223,13 +213,23 @@ namespace Stash.Providers
                     Url = groupImageUrl,
                 });
             }
-            else if (!string.IsNullOrWhiteSpace(screenImageUrl))
+            if (!string.IsNullOrWhiteSpace(screenImageUrl))
             {
                 result.Add(new RemoteImageInfo
                 {
                     Type = ImageType.Primary,
                     Url = screenImageUrl,
-                });
+                });            
+                result.Add(new RemoteImageInfo
+            {
+                Type = ImageType.Backdrop,
+                Url = screenImageUrl,
+            });
+                result.Add(new RemoteImageInfo
+            {
+                Type = ImageType.Thumb,
+                Url = screenImageUrl,
+            });
             }
 
             if (sceneData.Studio.HasValue)
